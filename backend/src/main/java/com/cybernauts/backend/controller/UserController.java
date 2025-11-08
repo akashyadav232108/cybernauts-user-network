@@ -1,11 +1,16 @@
 package com.cybernauts.backend.controller;
 
+import com.cybernauts.backend.dto.UserDTO;
 import com.cybernauts.backend.model.User;
 import com.cybernauts.backend.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,40 +22,54 @@ public class UserController {
         this.userService = userService;
     }
 
-    // GET /api/users
+    // -------------------- CRUD --------------------
+
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsers().stream()
+                .map(userService::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
 
-    // POST /api/users
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.ok(userService.toDTO(createdUser));
     }
 
-    // PUT /api/users/{id}
+
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable UUID id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @Valid @RequestBody User user) {
+        User updatedUser = userService.updateUser(id, user);
+        return ResponseEntity.ok(updatedUser);
     }
 
-    // DELETE /api/users/{id}
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully");
     }
 
-    // POST /api/users/{id}/link
+    // -------------------- FRIENDSHIP --------------------
+
     @PostMapping("/{id}/link")
-    public void linkUser(@PathVariable UUID id, @RequestParam UUID friendId) {
+    public ResponseEntity<String> linkFriend(@PathVariable UUID id, @RequestParam UUID friendId) {
         userService.linkUsers(id, friendId);
+        return ResponseEntity.ok("Users linked successfully");
     }
 
-    // DELETE /api/users/{id}/unlink
     @DeleteMapping("/{id}/unlink")
-    public void unlinkUser(@PathVariable UUID id, @RequestParam UUID friendId) {
+    public ResponseEntity<String> unlinkFriend(@PathVariable UUID id, @RequestParam UUID friendId) {
         userService.unlinkUsers(id, friendId);
+        return ResponseEntity.ok("Users unlinked successfully");
+    }
+
+    // -------------------- GRAPH DATA --------------------
+
+    @GetMapping("/graph")
+    public ResponseEntity<Map<String, Object>> getGraphData() {
+        Map<String, Object> graph = userService.getGraphData();
+        return ResponseEntity.ok(graph);
     }
 }
-
