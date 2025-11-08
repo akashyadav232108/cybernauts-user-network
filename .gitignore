@@ -1,0 +1,8 @@
+# Ignore local environment
+.env
+
+# Ignore backend build folder
+/backend/target/
+
+# Ignore frontend node_modules or build if any
+/frontend/node_modules/
