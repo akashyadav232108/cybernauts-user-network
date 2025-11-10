@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import ReactFlow, {
   Node,
-  Edge,
   Controls,
   Background,
   useNodesState,

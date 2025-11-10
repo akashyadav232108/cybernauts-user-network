@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
@@ -14,7 +14,6 @@ function AppContent() {
   const { users, loading } = useAppSelector((state) => state.users);
   const { selectedUserId } = useAppSelector((state) => state.users);
   const [showForm, setShowForm] = useState(false);
-  const [draggedHobby, setDraggedHobby] = useState<string | null>(null);
 
   // Fetch initial data
   useEffect(() => {
@@ -41,10 +40,6 @@ function AppContent() {
     }
   }, [selectedUserId]);
 
-  const handleHobbyDragStart = (hobby: string) => {
-    setDraggedHobby(hobby);
-  };
-
   return (
     <div className="app-container">
       {/* Header */}
@@ -58,7 +53,7 @@ function AppContent() {
       {/* Main Content */}
       <main className="app-main">
         {/* Hobbies Sidebar */}
-        <HobbiesSidebar onHobbyDragStart={handleHobbyDragStart} />
+        <HobbiesSidebar onHobbyDragStart={() => {}} />
 
         {/* Graph Area */}
         <div className="app-graph-area">
