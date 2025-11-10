@@ -2,7 +2,7 @@
 nixPkgs = ["openjdk17"]
 
 [phases.build]
-cmds = ["chmod +x mvnw", "./mvnw clean package -DskipTests"]
+cmd = "chmod +x mvnw && ./mvnw clean package -DskipTests"
 
 [start]
 cmd = "java -jar target/*.jar"
