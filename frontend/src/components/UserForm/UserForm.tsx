@@ -9,7 +9,6 @@ import {
   deleteUser,
   unlinkUsers,
   fetchGraphData,
-  setSelectedUser,
 } from '../../redux/userSlice';
 import { UserFormData } from '../../types';
 
