@@ -56,13 +56,29 @@ public class User {
 
     // -------------------- Helpers --------------------
     public void addFriend(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("Friend cannot be null");
+        }
+        if (this.friends == null) {
+            this.friends = new HashSet<>();
+        }
         friends.add(user);
+        if (user.getFriends() == null) {
+            user.friends = new HashSet<>();
+        }
         user.getFriends().add(this);
     }
 
     public void removeFriend(User user) {
-        friends.remove(user);
-        user.getFriends().remove(this);
+        if (user == null) {
+            throw new IllegalArgumentException("Friend cannot be null");
+        }
+        if (this.friends != null) {
+            friends.remove(user);
+        }
+        if (user.getFriends() != null) {
+            user.getFriends().remove(this);
+        }
     }
 
 

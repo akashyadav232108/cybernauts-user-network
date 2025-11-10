@@ -1,8 +1,29 @@
-# Ignore local environment
+# Environment variables (contains secrets!)
 .env
+.env.local
+.env.production
+*.env
 
-# Ignore backend build folder
+# Backend (Java/Spring Boot)
 /backend/target/
+/backend/.mvn/
+/backend/*.log
+/backend/*.jar
 
-# Ignore frontend node_modules or build if any
+# Frontend (React/Vite)
 /frontend/node_modules/
+/frontend/dist/
+/frontend/.vite/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

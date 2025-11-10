@@ -1,0 +1,38 @@
+.high-score-node {
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid #5a67d8;
+  color: white;
+  min-width: 180px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+.high-score-node:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.6);
+}
+
+.high-score-node-username {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.high-score-node-age {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.high-score-node-score {
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
